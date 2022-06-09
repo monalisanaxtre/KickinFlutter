@@ -199,33 +199,35 @@ class _HomeViewState extends State<HomeView> {
                           SizedBox(
                             height: 20,
                           ),
-                          Row(
-                            children: [
-                              Text(
-                                "Story",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                "Storyfvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.normal),
-                              ),
-                            ],
-                          ),
                         ],
-                      ))
+                      )),
+                  Column(children: [
+                    Row(
+                      children: [
+                        Text(
+                          "Story",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          "Good Quality makes it ..",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.normal),
+                        ),
+                      ],
+                    )
+                  ]),
                 ])));
   }
 }

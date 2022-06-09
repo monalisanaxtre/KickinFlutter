@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:kickinn/src/presentation/view/homeview.dart/homeview.dart';
+import 'package:kickinn/src/view/view/orderfragment.dart';
 
 class Home extends StatefulWidget {
   Home({Key? key}) : super(key: key);
@@ -12,7 +13,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   int _selectedIndex = 0;
 
-  final List<Widget> _children = [HomeView()];
+  final List<Widget> _children = [HomeView(), OrderFragment()];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -28,8 +29,8 @@ class _HomeState extends State<Home> {
         child: _children.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed, // Fixed
-        backgroundColor: Colors.black, // <-- This works for fixed
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: Colors.black,
         selectedItemColor: Colors.red,
         unselectedItemColor: Colors.grey,
         items: const <BottomNavigationBarItem>[
@@ -51,7 +52,6 @@ class _HomeState extends State<Home> {
           ),
         ],
         currentIndex: _selectedIndex,
-
         onTap: _onItemTapped,
       ),
     );
