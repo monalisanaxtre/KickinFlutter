@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:kickinn/src/presentation/view/homeview.dart/storeview.dart';
+import 'package:kickinn/src/view/view/orderfragment.dart';
 
 class HomeView extends StatefulWidget {
   HomeView({Key? key}) : super(key: key);
@@ -75,9 +77,9 @@ class _HomeViewState extends State<HomeView> {
                       RaisedButton(
                         color: Colors.red,
                         onPressed: () {
-                          // Route route = MaterialPageRoute(
-                          //     builder: (context) => );
-                          // Navigator.push(context, route);
+                          Route route = MaterialPageRoute(
+                              builder: (context) => StoreFragment());
+                          Navigator.push(context, route);
                         },
                         child: SizedBox(
                             width: MediaQuery.of(context).size.width * 0.3,

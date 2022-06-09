@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:kickinn/src/presentation/view/homeview.dart/homeview.dart';
+import 'package:kickinn/src/presentation/view/homeview.dart/more.dart';
 import 'package:kickinn/src/view/view/orderfragment.dart';
 
 class Home extends StatefulWidget {
@@ -13,7 +14,12 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   int _selectedIndex = 0;
 
-  final List<Widget> _children = [HomeView(), OrderFragment()];
+  final List<Widget> _children = [
+    HomeView(),
+    OrderFragment(),
+    OrderFragment(),
+    MoreFragment()
+  ];
 
   void _onItemTapped(int index) {
     setState(() {

@@ -12,57 +12,54 @@ class _OrderFragmentState extends State<OrderFragment> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
         child: Container(
-            color: Colors.pink,
+            color: Color.fromARGB(255, 7, 63, 49),
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
-            child: Container(
-                height: 100,
-                width: 100,
-                color: Colors.orange,
-                margin: const EdgeInsets.symmetric(vertical: 10.0),
-                child: ListView(
-                    // This next line does the trick.
-                    scrollDirection: Axis.vertical,
-                    children: <Widget>[
-                      Container(
-                        child: Text(
+            child: ListView.builder(itemBuilder: (context, position) {
+              return Container(
+                  height: 125,
+                  width: 120,
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
                           "item Name",
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 16,
                               fontWeight: FontWeight.bold),
                         ),
-                      ),
-                      Text(
-                        "79.00",
-                        style: TextStyle(
-                            color: Colors.red,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Text(
-                        "storeName",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Text(
-                        "24.05.2022",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(
-                        width: 8,
-                      ),
-                    ]))));
+                        Text(
+                          "79.00",
+                          style: TextStyle(
+                              color: Colors.red,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Text(
+                          "storeName",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Text(
+                          "24.05.2022",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(
+                          width: 8,
+                        ),
+                      ]));
+            })));
   }
 }
