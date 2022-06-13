@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:kickinn/src/presentation/view/homeview.dart/home.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({Key? key}) : super(key: key);
@@ -10,6 +13,11 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool value = false;
+  late String email, password;
+  bool isLoading = false;
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,7 +55,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       SizedBox(
                         height: 20,
                       ),
-                      TextField(
+                      TextFormField(
+                        controller: emailController,
                         style: TextStyle(fontSize: 20),
                         decoration: InputDecoration(
                           hintText: "Enter Email",
@@ -67,8 +76,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       SizedBox(
                         height: 10,
                       ),
-                      TextField(
-                        obscureText: true,
+                      TextFormField(
+                        controller: passwordController,
                         style: TextStyle(fontSize: 20),
                         decoration: InputDecoration(
                           hintText: "Password",
@@ -153,6 +162,25 @@ class _LoginScreenState extends State<LoginScreen> {
                             child: const Text('Sign In',
                                 style: TextStyle(fontSize: 20)),
                             onPressed: () {
+                              if (isLoading) {
+                                return;
+                              }
+                              if (emailController.text.isEmpty ||
+                                  passwordController.text.isEmpty) {
+                                SnackBar(content: Text("please fill it "));
+                                return;
+                                // scaffoldMessenger.showSnackBar(SnackBar(content:Text("Please Fill all fileds")));
+                                // return;
+                              }
+                              login(
+                                  emailController.text,
+                                  passwordController.text,
+                                  "android",
+                                  "ezO7GNQQRp-tVVEyp-E9PW:APA91bH3LLUX92tbn6g4NZ3y6SbBxz9BQKfCAMSHLVJL-wRYnOZ1ZfEVL7bSnVh_YnY1gq3URUHsUaSTpIASx4v3qD5I3mO8XzP2I86jiXabNWWpfByEr98s8G8o6w1kRgBoY-Rifv2e");
+                              setState(() {
+                                isLoading = true;
+                              });
+
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(builder: (context) => Home()),
@@ -186,5 +214,51 @@ class _LoginScreenState extends State<LoginScreen> {
                         ],
                       )
                     ]))));
+  }
+
+  login(email, password, deviceType, deviceToken) async {
+    Map data = {
+      'email': email,
+      'password': password,
+      'deviceType': deviceType,
+      'deviceToken': deviceToken,
+    };
+    print(data.toString());
+    final response = await http.post(
+        Uri.parse("https://www.naxtre.com/kickin-inn_dev/api/login"),
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: data,
+        encoding: Encoding.getByName("utf-8"));
+    setState(() {
+      isLoading = false;
+    });
+    if (response.statusCode == 200) {
+      Map<String, dynamic> resposne = jsonDecode(response.body);
+      if (!resposne['error']) {
+        Map<String, dynamic> user = resposne['data'];
+        print(" User name ${user['id']}");
+        savePref(1, user['name'], user['email'], user['id']);
+        Navigator.pushReplacementNamed(context, "/home");
+      } else {
+        print(" ${resposne['message']}");
+      }
+      // scaffoldMessenger.showSnackBar(SnackBar(content:Text("${resposne['message']}")));
+
+    } else {
+      // scaffoldMessenger.showSnackBar(SnackBar(content:Text("Please try again!")));
+    }
+  }
+
+  savePref(int value, String name, String email, int id) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+
+    preferences.setInt("value", value);
+    preferences.setString("name", name);
+    preferences.setString("email", email);
+    preferences.setString("id", id.toString());
+    preferences.commit();
   }
 }

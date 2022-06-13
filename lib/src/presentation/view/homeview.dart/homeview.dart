@@ -1,34 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:kickinn/servicewrapper/recommend.dart';
-import 'package:kickinn/src/data/recommend.dart';
 import 'package:kickinn/src/presentation/view/homeview.dart/storeview.dart';
 import 'package:kickinn/src/view/view/orderfragment.dart';
 
 class HomeView extends StatefulWidget {
-  final RecommendModel recommend;
-  HomeView({Key? key, @required this.recommend}) : super(key: key);
+  HomeView({Key? key}) : super(key: key);
 
   @override
-  State<HomeView> createState() => _HomeViewState(recommend);
+  State<HomeView> createState() => _HomeViewState();
 }
 
 class _HomeViewState extends State<HomeView> {
-  RecommendModel recommend;
-
-  _HomeViewState(this.recommend);
-  bool _loading;
-  @override
-  void initState() {
-    super.initState();
-    _loading = true;
-    Recommend.recommendfoodlist().then((foodlist) {
-      setState(() {
-        recommend = foodlist;
-        _loading = true;
-      });
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -128,35 +109,100 @@ class _HomeViewState extends State<HomeView> {
                   Container(
                       margin: const EdgeInsets.symmetric(vertical: 10.0),
                       height: 100.0,
-                      child: FutureBuilder<RecommendModel>(
-                          future: Recommend.recommendfoodlist(),
-                          builder: (context, snapshot){
-                            if (snapshot.hasData) {
-                              return ListView.builder(
-                                  itemCount: snapshot.data?.data.length,
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    // This next line does the trick.
-                                    scrollDirection:
-                                    Axis.horizontal;
-                                    // ignore: unnecessary_statements
-                                    children:
-                                    <Widget>[
-                                      Container(
-                                        width: 160.0,
-                                        decoration: BoxDecoration(
-                                          border: Border.all(
-                                              width: 3, color: Colors.grey),
-                                          // image: DecorationImage(
-                                          //   fit: BoxFit.fill,
-                                          //   // image: Image.network(snapshot.data.data.length)
-                                          // ),
-                                        ),
-                                      ),
-                                    ];
-                                  });
-                            }
-                          })),
+                      child: ListView(
+                        // This next line does the trick.
+                        scrollDirection: Axis.horizontal,
+                        children: <Widget>[
+                          Container(
+                            width: 160.0,
+                            decoration: BoxDecoration(
+                              border: Border.all(width: 3, color: Colors.grey),
+                              image: DecorationImage(
+                                fit: BoxFit.fill,
+                                image: AssetImage("assets/f.jpg"),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 8,
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(width: 3, color: Colors.grey),
+                            ),
+                            width: 160.0,
+                            child: Image.asset('assets/f.jpg'),
+                          ),
+                          SizedBox(
+                            width: 8,
+                          ),
+                          Container(
+                            width: 160.0,
+                            decoration: BoxDecoration(
+                              border: Border.all(width: 3, color: Colors.grey),
+                              image: DecorationImage(
+                                fit: BoxFit.fill,
+                                image: AssetImage("assets/f.jpg"),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 8,
+                          ),
+                          Container(
+                            width: 160.0,
+                            decoration: BoxDecoration(
+                              border: Border.all(width: 3, color: Colors.grey),
+                              image: DecorationImage(
+                                fit: BoxFit.fill,
+                                image: AssetImage("assets/f.jpg"),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 8,
+                          ),
+                          Container(
+                            width: 160.0,
+                            decoration: BoxDecoration(
+                              border: Border.all(width: 3, color: Colors.grey),
+                              image: DecorationImage(
+                                fit: BoxFit.fill,
+                                image: AssetImage("assets/f.jpg"),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 8,
+                          ),
+                          Container(
+                            width: 160.0,
+                            decoration: BoxDecoration(
+                              border: Border.all(width: 3, color: Colors.grey),
+                              image: DecorationImage(
+                                fit: BoxFit.fill,
+                                image: AssetImage("assets/f.jpg"),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 8,
+                          ),
+                          Container(
+                            width: 160.0,
+                            decoration: BoxDecoration(
+                              border: Border.all(width: 3, color: Colors.grey),
+                              image: DecorationImage(
+                                fit: BoxFit.fill,
+                                image: AssetImage("assets/f.jpg"),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                        ],
+                      )),
                   Column(children: [
                     Row(
                       children: [
