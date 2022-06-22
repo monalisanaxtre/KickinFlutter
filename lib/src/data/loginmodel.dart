@@ -1,90 +1,87 @@
-
 import 'dart:convert';
 
-LoginResponse loginFromJson(String str) => LoginResponse.fromJson(json.decode(str));
+LoginResponse loginFromJson(String str) =>
+    LoginResponse.fromJson(json.decode(str));
 
 String loginToJson(LoginResponse data) => json.encode(data.toJson());
 
 class LoginResponse {
-    LoginResponse({
-        this.status,
-        this.message,
-        this.data,
-    });
+  int status;
+  String message;
+  Data data;
+  LoginResponse({
+    required this.status,
+    required this.message,
+    required this.data,
+  });
 
-    int status;
-    String message;
-    Data data;
-
-    factory LoginResponse.fromJson(Map<String, dynamic> json) => LoginResponse(
+  factory LoginResponse.fromJson(Map<String, dynamic> json) => LoginResponse(
         status: json["status"],
         message: json["message"],
         data: Data.fromJson(json["data"]),
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "status": status,
         "message": message,
         "data": data.toJson(),
-    };
+      };
 }
 
 class Data {
-    Data({
-        this.userData,
-        this.tokenData,
-        this.address,
-    });
+  UserData userData;
+  TokenData tokenData;
+  Address address;
+  Data({
+    required this.userData,
+    required this.tokenData,
+    required this.address,
+  });
 
-    UserData userData;
-    TokenData tokenData;
-    Address address;
-
-    factory Data.fromJson(Map<String, dynamic> json) => Data(
+  factory Data.fromJson(Map<String, dynamic> json) => Data(
         userData: UserData.fromJson(json["user_data"]),
         tokenData: TokenData.fromJson(json["token_data"]),
         address: Address.fromJson(json["address"]),
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "user_data": userData.toJson(),
         "token_data": tokenData.toJson(),
         "address": address.toJson(),
-    };
+      };
 }
 
 class Address {
-    Address({
-        this.addressId,
-        this.userId,
-        this.name,
-        this.phoneNumber,
-        this.houseNo,
-        this.city,
-        this.fullAddress,
-        this.state,
-        this.landmark,
-        this.pincode,
-        this.latitude,
-        this.longitude,
-        this.createdOn,
-    });
+  String addressId;
+  String userId;
+  String name;
+  String phoneNumber;
+  String houseNo;
+  String city;
+  String fullAddress;
+  String state;
+  String landmark;
+  String pincode;
+  String latitude;
+  String longitude;
+  DateTime createdOn;
+  Address({
+    required this.addressId,
+    required this.userId,
+    required this.name,
+    required this.phoneNumber,
+    required this.houseNo,
+    required this.city,
+    required this.fullAddress,
+    required this.state,
+    required this.landmark,
+    required this.pincode,
+    required this.latitude,
+    required this.longitude,
+    required this.createdOn,
+  });
 
-    String addressId;
-    String userId;
-    String name;
-    String phoneNumber;
-    String houseNo;
-    String city;
-    String fullAddress;
-    String state;
-    String landmark;
-    String pincode;
-    String latitude;
-    String longitude;
-    DateTime createdOn;
-
-    factory Address.fromJson(Map<String, dynamic> json) => Address(
+  factory Address.fromJson(Map<String, dynamic> json) => Address(
         addressId: json["address_id"],
         userId: json["user_id"],
         name: json["name"],
@@ -98,9 +95,9 @@ class Address {
         latitude: json["latitude"],
         longitude: json["longitude"],
         createdOn: DateTime.parse(json["created_on"]),
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "address_id": addressId,
         "user_id": userId,
         "name": name,
@@ -114,51 +111,49 @@ class Address {
         "latitude": latitude,
         "longitude": longitude,
         "created_on": createdOn.toIso8601String(),
-    };
+      };
 }
 
 class TokenData {
-    TokenData({
-        this.type,
-        this.token,
-    });
+  String type;
+  String token;
+  TokenData({
+    required this.type,
+    required this.token,
+  });
 
-    String type;
-    String token;
-
-    factory TokenData.fromJson(Map<String, dynamic> json) => TokenData(
+  factory TokenData.fromJson(Map<String, dynamic> json) => TokenData(
         type: json["type"],
         token: json["token"],
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "type": type,
         "token": token,
-    };
+      };
 }
 
 class UserData {
-    UserData({
-        this.id,
-        this.firstName,
-        this.lastName,
-        this.email,
-        this.phoneNumber,
-        this.postcode,
-        this.latitude,
-        this.longitude,
-    });
+  String id;
+  String firstName;
+  String lastName;
+  String email;
+  String phoneNumber;
+  String postcode;
+  String latitude;
+  String longitude;
+  UserData({
+    required this.id,
+    required this.firstName,
+    required this.lastName,
+    required this.email,
+    required this.phoneNumber,
+    required this.postcode,
+    required this.latitude,
+    required this.longitude,
+  });
 
-    String id;
-    String firstName;
-    String lastName;
-    String email;
-    String phoneNumber;
-    String postcode;
-    String latitude;
-    String longitude;
-
-    factory UserData.fromJson(Map<String, dynamic> json) => UserData(
+  factory UserData.fromJson(Map<String, dynamic> json) => UserData(
         id: json["id"],
         firstName: json["first_name"],
         lastName: json["last_name"],
@@ -167,9 +162,9 @@ class UserData {
         postcode: json["postcode"],
         latitude: json["latitude"],
         longitude: json["longitude"],
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "id": id,
         "first_name": firstName,
         "last_name": lastName,
@@ -178,5 +173,5 @@ class UserData {
         "postcode": postcode,
         "latitude": latitude,
         "longitude": longitude,
-    };
+      };
 }

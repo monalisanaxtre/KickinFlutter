@@ -6,13 +6,12 @@ RecommendModel recommendFromJson(String str) =>
 String recommendToJson(RecommendModel data) => json.encode(data.toJson());
 
 class RecommendModel {
-  RecommendModel({
-    this.status,
-    this.data,
-  });
-
   int status;
   List<Datum> data;
+  RecommendModel({
+    required this.status,
+    required this.data,
+  });
 
   factory RecommendModel.fromJson(Map<String, dynamic> json) => RecommendModel(
         status: json["status"],
@@ -26,16 +25,6 @@ class RecommendModel {
 }
 
 class Datum {
-  Datum({
-    this.itemId,
-    this.itemImage,
-    this.categoryId,
-    this.itemName,
-    this.itemPrice,
-    // this.itemQuantity,
-    this.itemDescription,
-  });
-
   String itemId;
   String itemImage;
   String categoryId;
@@ -43,6 +32,15 @@ class Datum {
   String itemPrice;
   // ItemQuantity itemQuantity;
   String itemDescription;
+  Datum({
+    required this.itemId,
+    required this.itemImage,
+    required this.categoryId,
+    required this.itemName,
+    required this.itemPrice,
+    // this.itemQuantity,
+    required this.itemDescription,
+  });
 
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
         itemId: json["item_id"],

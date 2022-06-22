@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:kickinn/src/data/recommend.dart';
 import 'package:kickinn/src/presentation/view/homeview.dart/storeview.dart';
 import 'package:kickinn/src/view/view/orderfragment.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class HomeView extends StatefulWidget {
   HomeView({Key? key}) : super(key: key);
@@ -10,10 +13,24 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+  late RecommendModel recommendModel;
+
+  @override
+  void initState() {
+    super.initState();
+   getrecommendFood().then((foodlist) {
+      setState(() {
+        recommendModel = foodlist;
+      });
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-        child: Container(
+        child:FutureBuilder<RecommendModel>(
+            future: getrecommendFood(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {return Container(
             color: Colors.black,
             margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
             height: MediaQuery.of(context).size.height,
@@ -109,7 +126,10 @@ class _HomeViewState extends State<HomeView> {
                   Container(
                       margin: const EdgeInsets.symmetric(vertical: 10.0),
                       height: 100.0,
-                      child: ListView(
+                      child: ListView.builder(
+                         shrinkWrap: true,
+                    itemBuilder: (context, position) {
+                        
                         // This next line does the trick.
                         scrollDirection: Axis.horizontal,
                         children: <Widget>[
@@ -119,117 +139,36 @@ class _HomeViewState extends State<HomeView> {
                               border: Border.all(width: 3, color: Colors.grey),
                               image: DecorationImage(
                                 fit: BoxFit.fill,
-                                image: AssetImage("assets/f.jpg"),
+                                image: AssetImage(snapshot.data!.data[position].itemImage),
                               ),
                             ),
                           ),
-                          SizedBox(
-                            width: 8,
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                              border: Border.all(width: 3, color: Colors.grey),
-                            ),
-                            width: 160.0,
-                            child: Image.asset('assets/f.jpg'),
-                          ),
-                          SizedBox(
-                            width: 8,
-                          ),
-                          Container(
-                            width: 160.0,
-                            decoration: BoxDecoration(
-                              border: Border.all(width: 3, color: Colors.grey),
-                              image: DecorationImage(
-                                fit: BoxFit.fill,
-                                image: AssetImage("assets/f.jpg"),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 8,
-                          ),
-                          Container(
-                            width: 160.0,
-                            decoration: BoxDecoration(
-                              border: Border.all(width: 3, color: Colors.grey),
-                              image: DecorationImage(
-                                fit: BoxFit.fill,
-                                image: AssetImage("assets/f.jpg"),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 8,
-                          ),
-                          Container(
-                            width: 160.0,
-                            decoration: BoxDecoration(
-                              border: Border.all(width: 3, color: Colors.grey),
-                              image: DecorationImage(
-                                fit: BoxFit.fill,
-                                image: AssetImage("assets/f.jpg"),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 8,
-                          ),
-                          Container(
-                            width: 160.0,
-                            decoration: BoxDecoration(
-                              border: Border.all(width: 3, color: Colors.grey),
-                              image: DecorationImage(
-                                fit: BoxFit.fill,
-                                image: AssetImage("assets/f.jpg"),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 8,
-                          ),
-                          Container(
-                            width: 160.0,
-                            decoration: BoxDecoration(
-                              border: Border.all(width: 3, color: Colors.grey),
-                              image: DecorationImage(
-                                fit: BoxFit.fill,
-                                image: AssetImage("assets/f.jpg"),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                        ],
-                      )),
-                  Column(children: [
-                    Row(
-                      children: [
-                        Text(
-                          "Story",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          "Good Quality makes it ..",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.normal),
-                        ),
-                      ],
-                    )
+                    
                   ]),
-                ])));
+        )
+        ]
+        )
+        );
+        
+              }
+                 return Center(
+                child: CircularProgressIndicator(),
+              );
+              }
+              
+              )
+              );}
+
+Future<RecommendModel> getrecommendFood() async {
+  var response = await http
+      .get(Uri.parse('https://www.naxtre.com/kickin-inn_dev/api/get_recommended_items'));
+
+  if (response.statusCode == 200) {
+    var jsonString = response.body;
+    var jsonMap = json.decode(jsonString);
+    return RecommendModel.fromJson(jsonMap);
+  } else {
+    throw Exception("Failed to load data");
   }
 }
+

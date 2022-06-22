@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:kickinn/src/data/loginmodel.dart';
 import 'package:kickinn/src/presentation/view/homeview.dart/home.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -17,6 +19,9 @@ class _LoginScreenState extends State<LoginScreen> {
   bool isLoading = false;
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
+  late String emailControllerErrorText;
+
+  final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -28,9 +33,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
                 height: MediaQuery.of(context).size.height,
                 width: MediaQuery.of(context).size.width,
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
+                child: Form(
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
                       SizedBox(
                         height: 70,
                       ),
@@ -73,9 +79,11 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                       ),
+
                       SizedBox(
                         height: 10,
                       ),
+
                       TextFormField(
                         controller: passwordController,
                         style: TextStyle(fontSize: 20),
@@ -213,42 +221,33 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ],
                       )
-                    ]))));
+                    ])))));
   }
 
-  login(email, password, deviceType, deviceToken) async {
-    Map data = {
+  Future<LoginResponse> login(email, password, deviceType, deviceToken) async {
+    var data = {
       'email': email,
       'password': password,
-      'deviceType': deviceType,
-      'deviceToken': deviceToken,
+      'device_type': deviceType,
+      'device_token': deviceToken,
     };
     print(data.toString());
-    final response = await http.post(
-        Uri.parse("https://www.naxtre.com/kickin-inn_dev/api/login"),
-        headers: {
-          "Accept": "application/json",
-          "Content-Type": "application/x-www-form-urlencoded"
-        },
-        body: data,
-        encoding: Encoding.getByName("utf-8"));
-    setState(() {
-      isLoading = false;
-    });
-    if (response.statusCode == 200) {
-      Map<String, dynamic> resposne = jsonDecode(response.body);
-      if (!resposne['error']) {
-        Map<String, dynamic> user = resposne['data'];
-        print(" User name ${user['id']}");
-        savePref(1, user['name'], user['email'], user['id']);
-        Navigator.pushReplacementNamed(context, "/home");
-      } else {
-        print(" ${resposne['message']}");
-      }
-      // scaffoldMessenger.showSnackBar(SnackBar(content:Text("${resposne['message']}")));
 
+    var headers = {
+      "content-type": "application/json",
+    };
+    var body = data;
+    var response = await http.post(
+        Uri.parse('https://www.naxtre.com/kickin-inn_dev/api/login'),
+        headers: headers,
+        body: json.encode(body));
+
+    if (response.statusCode == 200) {
+      var jsonString = response.body;
+      var jsonMap = json.decode(jsonString);
+      return LoginResponse.fromJson(jsonMap);
     } else {
-      // scaffoldMessenger.showSnackBar(SnackBar(content:Text("Please try again!")));
+      throw Exception("Failed to load data");
     }
   }
 
