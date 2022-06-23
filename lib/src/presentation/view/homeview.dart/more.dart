@@ -15,13 +15,34 @@ class _MoreFragmentState extends State<MoreFragment> {
             child: Container(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
-      color: Colors.red,
-      child: ListView.builder(itemBuilder: (context, position) {
-        return Container(
-          height: 100,
-          width: 100,
-        );
-      }),
+      color: Colors.black,
+      child: Container(
+          margin: EdgeInsets.all(10),
+          width: 40,
+          color: Colors.red,
+          child: Row(children: [
+            Icon(
+              Icons.person,
+              color: Colors.white,
+              size: 30.0,
+            ),
+            SizedBox(
+              width: 5,
+            ),
+            Text(
+              "Profile",
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+            Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+              Icon(
+                Icons.arrow_right_alt_outlined,
+                color: Colors.white,
+                size: 30.0,
+              ),
+            ]),
+          ])),
     )));
   }
 }

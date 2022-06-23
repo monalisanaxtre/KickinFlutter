@@ -3,20 +3,29 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 
-class Login {
-  Future<LoginResponse> login() async {
-    // ignore: prefer_typing_uninitialized_variables
-    var loginresponse;
-    final response =
-        await http.get(Uri.parse('https://www.naxtre.com/kickin-inn_dev/'));
-    try {
-      if (response.statusCode == 200) {
-        loginresponse = LoginResponse.fromJson(jsonDecode(response.body));
-        return loginresponse;
-      }
-    } catch (e) {
-      return loginresponse;
+ Future<LoginResponse> login(email, password, deviceType, deviceToken) async {
+    var data = {
+      'email': email,
+      'password': password,
+      'device_type': deviceType,
+      'device_token': deviceToken,
+    };
+    print(data.toString());
+
+    var headers = {
+      "content-type": "application/json",
+    };
+    var body = data;
+    var response = await http.post(
+        Uri.parse('https://www.naxtre.com/kickin-inn_dev/api/login'),
+        headers: headers,
+        body: json.encode(body));
+
+    if (response.statusCode == 200) {
+      var jsonString = response.body;
+      var jsonMap = json.decode(jsonString);
+      return LoginResponse.fromJson(jsonMap);
+    } else {
+      throw Exception("Failed to load data");
     }
-    return loginresponse;
   }
-}
