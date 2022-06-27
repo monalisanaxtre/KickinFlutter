@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:kickinn/src/presentation/view/homeview.dart/menu.dart';
 import 'dart:convert';
 
 import '../../../data/storemodel.dart';
@@ -47,7 +48,7 @@ class _StoreFragmentState extends State<StoreFragment> {
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                       Image.asset(
                         'assets/kick_inn_logo.png',
-                        height: 120,
+                        height: 100,
                       ),
                     ]),
                     Row(mainAxisAlignment: MainAxisAlignment.end, children: [
@@ -83,80 +84,86 @@ class _StoreListState extends State<StoreList> {
                 return ListView.builder(
                     shrinkWrap: true,
                     itemBuilder: (context, position) {
-                      return Container(
-                          margin: EdgeInsets.all(10),
-                          height: 80,
-                          width: 80,
-                          color: Colors.grey[800],
-                          child: Column(
-                            children: <Widget>[
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                      return GestureDetector(
+                          child: Container(
+                              margin: EdgeInsets.all(10),
+                              height: 80,
+                              width: 80,
+                              color: Colors.grey[800],
+                              child: Column(
                                 children: <Widget>[
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: <Widget>[
-                                      Row(children: [
-                                        SizedBox(
-                                          width: 10,
-                                        ),
-                                        Text(
-                                          snapshot
-                                              .data!.data[position].storeName,
-                                          style: TextStyle(
-                                              fontSize: 20.0,
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ]),
-                                      SizedBox(
-                                        height: 5,
-                                      ),
-                                      Row(
-                                        children: [
-                                          SizedBox(
-                                            width: 5,
-                                          ),
-                                          Icon(
-                                            Icons.share_location_outlined,
-                                            size: 35.0,
-                                            color: Colors.grey,
-                                          ),
-                                          SizedBox(
-                                            width: 5,
-                                          ),
-                                          Text(
-                                            snapshot.data!.data[position]
-                                                .storeAddress,
-                                            style: TextStyle(
-                                              fontSize: 18.0,
-                                              color: Colors.white,
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          Row(children: [
+                                            SizedBox(
+                                              width: 10,
                                             ),
+                                            Text(
+                                              snapshot.data!.data[position]
+                                                  .storeName,
+                                              style: TextStyle(
+                                                  fontSize: 20.0,
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ]),
+                                          SizedBox(
+                                            height: 5,
                                           ),
+                                          Row(
+                                            children: [
+                                              SizedBox(
+                                                width: 5,
+                                              ),
+                                              Icon(
+                                                Icons.share_location_outlined,
+                                                size: 35.0,
+                                                color: Colors.grey,
+                                              ),
+                                              SizedBox(
+                                                width: 5,
+                                              ),
+                                              Text(
+                                                snapshot.data!.data[position]
+                                                    .storeAddress,
+                                                style: TextStyle(
+                                                  fontSize: 18.0,
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                            ],
+                                          )
                                         ],
-                                      )
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(5.0),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: <Widget>[
+                                            Icon(
+                                              Icons.arrow_right_alt_sharp,
+                                              size: 35.0,
+                                              color: Colors.grey,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
                                     ],
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(5.0),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: <Widget>[
-                                        Icon(
-                                          Icons.arrow_right_alt_sharp,
-                                          size: 35.0,
-                                          color: Colors.grey,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
                                 ],
-                              ),
-                            ],
-                          ));
+                              )),
+                          onTap: () {
+                            Route route = MaterialPageRoute(
+                                builder: (context) => MenuFragment());
+                            Navigator.push(context, route);
+                          });
                     },
                     itemCount: snapshot.data!.data.length);
               }

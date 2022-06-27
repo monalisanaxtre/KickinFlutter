@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kickinn/servicewrapper/recommend.dart';
 import 'package:kickinn/src/data/recommend.dart';
+import 'package:kickinn/src/presentation/view/homeview.dart/dineinwebview.dart';
 import 'package:kickinn/src/presentation/view/homeview.dart/storeview.dart';
 import 'package:kickinn/src/view/view/orderfragment.dart';
 import 'package:http/http.dart' as http;
@@ -17,7 +18,7 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   late RecommendModel recommendModel;
-  late Story story;
+  Story? story;
 
   @override
   void initState() {
@@ -38,27 +39,28 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+        scrollDirection: Axis.vertical,
         child: FutureBuilder<RecommendModel>(
             future: getrecommendFood(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return Container(
                   color: Colors.black,
-                  margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                  margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
                   height: MediaQuery.of(context).size.height,
                   width: MediaQuery.of(context).size.width,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(
-                        height: 40,
+                        height: 20,
                       ),
                       Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Image.asset(
                               'assets/kick_inn_logo.png',
-                              height: 120,
+                              height: 100,
                             ),
                             IconButton(
                               alignment: Alignment.centerRight,
@@ -69,7 +71,7 @@ class _HomeViewState extends State<HomeView> {
                             )
                           ]),
                       SizedBox(
-                        height: 20,
+                        height: 5,
                       ),
                       Container(
                         width: MediaQuery.of(context).size.width,
@@ -88,12 +90,12 @@ class _HomeViewState extends State<HomeView> {
                           RaisedButton(
                             color: Colors.red,
                             onPressed: () {
-                              // Route route =
-                              //     MaterialPageRoute(builder: (context) => );
-                              // Navigator.push(context, route);
+                              Route route = MaterialPageRoute(
+                                  builder: (context) => WebViewStack());
+                              Navigator.push(context, route);
                             },
                             child: SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.3,
+                              width: MediaQuery.of(context).size.width * 0.35,
                               child: Text(
                                 "Dine In",
                                 textAlign: TextAlign.center,
@@ -113,7 +115,7 @@ class _HomeViewState extends State<HomeView> {
                               Navigator.push(context, route);
                             },
                             child: SizedBox(
-                                width: MediaQuery.of(context).size.width * 0.3,
+                                width: MediaQuery.of(context).size.width * 0.35,
                                 child: Text(
                                   "Order",
                                   textAlign: TextAlign.center,
@@ -147,11 +149,11 @@ class _HomeViewState extends State<HomeView> {
                             itemBuilder: (context, position) {
                               return Column(children: [
                                 Container(
-                                  height: 120,
+                                  height: 100,
                                   width: 150,
                                   decoration: BoxDecoration(
                                     border: Border.all(
-                                        width: 3, color: Colors.grey),
+                                        width: 2, color: Colors.grey),
                                     image: DecorationImage(
                                       fit: BoxFit.fill,
                                       image: NetworkImage(snapshot
@@ -165,7 +167,7 @@ class _HomeViewState extends State<HomeView> {
                                     Text(
                                       snapshot.data!.data[position].itemName,
                                       style: TextStyle(
-                                          fontSize: 20.0,
+                                          fontSize: 16.0,
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold),
                                     ),
@@ -174,26 +176,25 @@ class _HomeViewState extends State<HomeView> {
                               ]);
                             }),
                       ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            child: Text(
-                              story.data.description,
-                              style: TextStyle(
-                                  fontSize: 12.0,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.normal),
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        margin: EdgeInsets.only(bottom: 1),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: Text(
+                                story!.data.description,
+                                style: TextStyle(
+                                    fontSize: 14.0,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.normal),
+                                maxLines: 40,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                      SizedBox(
-                        height: 2,
-                      )
                     ],
                   ),
                 );
@@ -204,8 +205,6 @@ class _HomeViewState extends State<HomeView> {
             }));
   }
 }
-
-
 
 // story api
 Future<Story> getStory() async {

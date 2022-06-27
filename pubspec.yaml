@@ -33,7 +33,12 @@ dependencies:
   json_annotation: ^4.4.0
   json_serializable: ^6.1.4
   http: ^0.13.4
-  shared_preferences: ^2.0.6
+  shared_preferences: ^2.0.15
+  firebase_core: 
+  firebase_messaging: 
+  cloud_firestore: 
+  webview_flutter: ^3.0.4
+  
 
 dev_dependencies:
   flutter_test:

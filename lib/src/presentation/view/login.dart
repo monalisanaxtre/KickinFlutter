@@ -1,8 +1,10 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:kickinn/servicewrapper/Login.dart';
 import 'package:kickinn/src/data/loginmodel.dart';
 import 'package:kickinn/src/presentation/view/homeview.dart/home.dart';
 import 'package:http/http.dart' as http;
+import 'package:kickinn/src/presentation/view/homeview.dart/registration.dart';
 import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
@@ -18,11 +20,20 @@ class _LoginScreenState extends State<LoginScreen> {
   bool value = false;
   late String email, password;
   bool isLoading = false;
+
+  // FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   late String emailControllerErrorText;
 
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   var tokenn = _firebaseMessaging.getToken().then((tokenn) {
+  //     print(tokenn);
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -66,12 +77,13 @@ class _LoginScreenState extends State<LoginScreen> {
                         controller: emailController,
                         style: TextStyle(fontSize: 20),
                         decoration: InputDecoration(
+                          fillColor: Colors.blueGrey,
                           hintText: "Enter Email",
                           hintStyle:
                               TextStyle(fontSize: 20.0, color: Colors.white),
                           border: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: Colors.teal,
+                              color: Colors.blueGrey,
                             ),
                           ),
                           prefixIcon: const Icon(
@@ -94,7 +106,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               TextStyle(fontSize: 20.0, color: Colors.white),
                           border: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: Colors.white,
+                              color: Colors.blueGrey,
                             ),
                           ),
                           prefixIcon: const Icon(
@@ -126,6 +138,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Row(
                         children: [
                           Checkbox(
+                              side: BorderSide(color: Colors.white),
                               checkColor: Colors.white,
                               value: this.value,
                               onChanged: (bool? value) {
@@ -181,11 +194,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                 // scaffoldMessenger.showSnackBar(SnackBar(content:Text("Please Fill all fileds")));
                                 // return;
                               }
-                              login(
-                                  emailController.text,
-                                  passwordController.text,
-                                  "android",
-                                  "ezO7GNQQRp-tVVEyp-E9PW:APA91bH3LLUX92tbn6g4NZ3y6SbBxz9BQKfCAMSHLVJL-wRYnOZ1ZfEVL7bSnVh_YnY1gq3URUHsUaSTpIASx4v3qD5I3mO8XzP2I86jiXabNWWpfByEr98s8G8o6w1kRgBoY-Rifv2e");
+                              login(emailController.text,
+                                  passwordController.text, "android", "");
                               setState(() {
                                 isLoading = true;
                               });
@@ -201,31 +211,37 @@ class _LoginScreenState extends State<LoginScreen> {
                         height: 20,
                       ),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Don\'t have account?",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.normal),
-                          ),
-                          SizedBox(
-                            width: 6,
-                          ),
-                          Text(
-                            "Sign up",
-                            style: TextStyle(
-                                color: Colors.red,
-                                fontSize: 16,
-                                fontWeight: FontWeight.normal),
-                          ),
-                        ],
-                      )
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Don\'t have account?",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.normal),
+                            ),
+                            SizedBox(
+                              width: 6,
+                            ),
+                            GestureDetector(
+                              child: Text(
+                                "Sign up",
+                                style: TextStyle(
+                                    color: Colors.red,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.normal),
+                              ),
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Registration()),
+                                );
+                              },
+                            )
+                          ])
                     ])))));
   }
-
-  
 
   savePref(int value, String name, String email, int id) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
