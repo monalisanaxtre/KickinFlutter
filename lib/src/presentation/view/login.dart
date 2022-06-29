@@ -38,27 +38,30 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.green,
-        body: Center(
-            child: Container(
-                color: Colors.green,
-                margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
-                height: MediaQuery.of(context).size.height,
-                width: MediaQuery.of(context).size.width,
-                child: Form(
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
+        backgroundColor: Colors.black,
+        body: SingleChildScrollView(
+            child: Center(
+                child: Container(
+                    color: Colors.black,
+                    margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                    height: MediaQuery.of(context).size.height,
+                    width: MediaQuery.of(context).size.width,
+                    child: Form(
+                        child: Column(children: [
                       SizedBox(
-                        height: 70,
+                        height: 20,
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Image.asset('assets/cross.png'),
-                          SizedBox(width: 40),
+                          Image.asset(
+                            'assets/cross.png',
+                            height: 40,
+                          ),
+                          SizedBox(width: 70),
                           Image.asset(
                             'assets/kick_inn_logo.png',
-                            height: 120,
+                            height: 100,
                           ),
                         ],
                       ),
@@ -70,20 +73,22 @@ class _LoginScreenState extends State<LoginScreen> {
                             fontSize: 22,
                             fontWeight: FontWeight.bold),
                       ),
-                      SizedBox(
-                        height: 20,
-                      ),
+                      SizedBox(height: 10),
                       TextFormField(
                         controller: emailController,
-                        style: TextStyle(fontSize: 20),
+                        style: TextStyle(fontSize: 16, color: Colors.white),
                         decoration: InputDecoration(
-                          fillColor: Colors.blueGrey,
+                          fillColor: Colors.white,
                           hintText: "Enter Email",
-                          hintStyle:
-                              TextStyle(fontSize: 20.0, color: Colors.white),
+                          hintStyle: TextStyle(color: Colors.white),
                           border: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: Colors.blueGrey,
+                              color: Colors.white,
+                            ),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.white,
                             ),
                           ),
                           prefixIcon: const Icon(
@@ -91,6 +96,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             color: Colors.white,
                           ),
                         ),
+                        // validator: validateEmail,
                       ),
 
                       SizedBox(
@@ -98,15 +104,21 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
 
                       TextFormField(
+                        obscureText: true,
                         controller: passwordController,
-                        style: TextStyle(fontSize: 20),
+                        style: TextStyle(fontSize: 16, color: Colors.white),
                         decoration: InputDecoration(
                           hintText: "Password",
                           hintStyle:
-                              TextStyle(fontSize: 20.0, color: Colors.white),
+                              TextStyle(fontSize: 16.0, color: Colors.white),
                           border: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: Colors.blueGrey,
+                              color: Colors.white,
+                            ),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.white,
                             ),
                           ),
                           prefixIcon: const Icon(
@@ -194,17 +206,19 @@ class _LoginScreenState extends State<LoginScreen> {
                                 // scaffoldMessenger.showSnackBar(SnackBar(content:Text("Please Fill all fileds")));
                                 // return;
                               }
-                              login(emailController.text,
-                                  passwordController.text, "android", "");
+                              login(
+                                  emailController.text,
+                                  passwordController.text,
+                                  "android",
+                                  "ezO7GNQQRp-tVVEyp-E9PW:APA91bH3LLUX92tbn6g4NZ3y6SbBxz9BQKfCAMSHLVJL-wRYnOZ1ZfEVL7bSnVh_YnY1gq3URUHsUaSTpIASx4v3qD5I3mO8XzP2I86jiXabNWWpfByEr98s8G8o6w1kRgBoY-Rifv2e");
                               setState(() {
-                                isLoading = true;
+                                isLoading = false;
                               });
 
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(builder: (context) => Home()),
                               );
-                              setState(() {});
                             },
                           ))),
                       SizedBox(
@@ -240,7 +254,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               },
                             )
                           ])
-                    ])))));
+                    ]))))));
   }
 
   savePref(int value, String name, String email, int id) async {
@@ -251,5 +265,18 @@ class _LoginScreenState extends State<LoginScreen> {
     preferences.setString("email", email);
     preferences.setString("id", id.toString());
     preferences.commit();
+  }
+
+  String validateEmail(String value) {
+    String pattern =
+        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+    RegExp regExp = new RegExp(pattern);
+    if (value.length == 0) {
+      return "Email is Required";
+    } else if (!regExp.hasMatch(value)) {
+      return "Invalid Email";
+    } else {
+      return "null";
+    }
   }
 }

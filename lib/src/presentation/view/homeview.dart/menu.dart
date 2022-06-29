@@ -28,8 +28,8 @@ class _MenuFragmentState extends State<MenuFragment> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Container(
-                  height: 30,
-                  width: 30,
+                  height: 40,
+                  width: 40,
                   color: Colors.red,
                   child: IconButton(
                     alignment: Alignment.topLeft,

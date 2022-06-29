@@ -139,43 +139,53 @@ class _HomeViewState extends State<HomeView> {
                         ],
                       ),
                       SizedBox(width: 10),
-                      Container(
-                        margin: const EdgeInsets.symmetric(vertical: 10.0),
-                        height: 150,
-                        child: ListView.builder(
-                            shrinkWrap: true,
-                            scrollDirection: Axis.horizontal,
-                            itemCount: snapshot.data!.data.length,
-                            itemBuilder: (context, position) {
-                              return Column(children: [
-                                Container(
-                                  height: 100,
-                                  width: 150,
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                        width: 2, color: Colors.grey),
-                                    image: DecorationImage(
-                                      fit: BoxFit.fill,
-                                      image: NetworkImage(snapshot
-                                          .data!.data[position].itemImage),
-                                    ),
-                                  ),
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      snapshot.data!.data[position].itemName,
-                                      style: TextStyle(
-                                          fontSize: 16.0,
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ],
-                                ),
-                              ]);
-                            }),
-                      ),
+                      story == null
+                          ? CircularProgressIndicator(
+                              color: Colors.yellow,
+                            )
+                          : Container(
+                              margin:
+                                  const EdgeInsets.symmetric(vertical: 10.0),
+                              height: 150,
+                              child: ListView.builder(
+                                  shrinkWrap: true,
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: snapshot.data!.data.length,
+                                  itemBuilder: (context, position) {
+                                    return Column(children: [
+                                      Container(
+                                        height: 100,
+                                        width: 150,
+                                        decoration: BoxDecoration(
+                                          border: Border.all(
+                                              width: 2, color: Colors.grey),
+                                          image: DecorationImage(
+                                            fit: BoxFit.fill,
+                                            image: NetworkImage(snapshot.data!
+                                                .data[position].itemImage),
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            snapshot
+                                                .data!.data[position].itemName,
+                                            style: TextStyle(
+                                                fontSize: 16.0,
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ],
+                                      ),
+                                    ]);
+                                  }),
+                            ),
                       Text(
                         story!.data.description,
                         style: TextStyle(

@@ -24,6 +24,7 @@ class _MenuCategoryState extends State<MenuCategory> {
           width: MediaQuery.of(context).size.width,
           child: Column(children: [
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Container(
                   height: 30,
@@ -92,56 +93,48 @@ class _MenuCategoryListState extends State<MenuCategoryList> {
                 return GridView.builder(
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
-                      childAspectRatio: itemWidth / itemHeight,
-                      // crossAxisSpacing: 50,
                     ),
-                    itemCount:
-                        snapshot.data!.data.length, //trainerData1.data.length,
+                    itemCount: snapshot.data!.data.length,
                     itemBuilder: (BuildContext context, int index) {
-                      //   TrainerData trainerIndex = snapshot.data.data[index] as TrainerData;
                       return GridTile(
                           child: Padding(
                               padding: EdgeInsets.fromLTRB(9, 4, 9, 0),
                               child: Container(
                                   child: InkWell(
-                                      child: Column(
-                                          // crossAxisAlignment: CrossAxisAlignment.start,
-                                          // mainAxisAlignment: MainAxisAlignment.start,
-                                          children: <Widget>[
-                                            Container(
-                                              child: Card(
-                                                semanticContainer: true,
-                                                clipBehavior:
-                                                    Clip.antiAliasWithSaveLayer,
-                                                shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10.0)),
-                                                child: AspectRatio(
-                                                  aspectRatio: 20.0 / 18.0,
-                                                  child: Image.network(
-                                                    snapshot.data!.data[index]
-                                                        .image,
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
+                                      child: Column(children: <Widget>[
+                                        Container(
+                                          child: Card(
+                                            semanticContainer: true,
+                                            clipBehavior:
+                                                Clip.antiAliasWithSaveLayer,
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        10.0)),
+                                            child: AspectRatio(
+                                              aspectRatio: 20.0 / 18.0,
+                                              child: Image.network(
+                                                snapshot
+                                                    .data!.data[index].image,
+                                                fit: BoxFit.cover,
                                               ),
                                             ),
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: <Widget>[
-                                                Text(
-                                                  snapshot.data!.data[index]
-                                                      .itemName
-                                                      .toUpperCase(),
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                ),
-                                                SizedBox(height: 3),
-                                              ],
+                                          ),
+                                        ),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Text(
+                                              snapshot
+                                                  .data!.data[index].itemName
+                                                  .toUpperCase(),
+                                              overflow: TextOverflow.ellipsis,
                                             ),
-                                          ]),
+                                            SizedBox(height: 3),
+                                          ],
+                                        ),
+                                      ]),
                                       onTap: () {}))));
                     });
               }

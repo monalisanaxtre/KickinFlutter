@@ -25,46 +25,36 @@ class _StoreFragmentState extends State<StoreFragment> {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-        child: Scaffold(
-            backgroundColor: Colors.black,
-            body: SingleChildScrollView(
-                physics: AlwaysScrollableScrollPhysics(),
-                scrollDirection: Axis.vertical,
-                child: Container(
-                    color: Colors.black,
-                    // height: MediaQuery.of(context).size.height,
-                    width: MediaQuery.of(context).size.width,
-                    child: Column(children: [
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Container(
-                              height: 40,
-                              width: 40,
-                              color: Colors.red,
-                              child: IconButton(
-                                alignment: Alignment.topLeft,
-                                icon: Icon(Icons.arrow_back),
-                                iconSize: 28.0,
-                                color: Colors.white,
-                                onPressed: () {},
-                              ),
-                            ),
-                            Image.asset(
-                              'assets/kick_inn_logo.png',
-                              height: 100,
-                            ),
-                            IconButton(
-                              alignment: Alignment.topRight,
-                              icon: Icon(Icons.card_travel_sharp),
-                              iconSize: 28.0,
-                              color: Colors.white,
-                              onPressed: () {},
-                            ),
-                          ]),
-                      StoreList()
-                    ])))));
+    return Scaffold(
+        backgroundColor: Colors.black,
+        body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+            Container(
+              height: 40,
+              width: 40,
+              color: Colors.red,
+              child: IconButton(
+                alignment: Alignment.topLeft,
+                icon: Icon(Icons.arrow_back),
+                iconSize: 28.0,
+                color: Colors.white,
+                onPressed: () {},
+              ),
+            ),
+            Image.asset(
+              'assets/kick_inn_logo.png',
+              height: 100,
+            ),
+            IconButton(
+              alignment: Alignment.topRight,
+              icon: Icon(Icons.card_travel_sharp),
+              iconSize: 28.0,
+              color: Colors.white,
+              onPressed: () {},
+            ),
+          ]),
+          Expanded(child: StoreList())
+        ]));
   }
 }
 
@@ -78,102 +68,100 @@ class StoreList extends StatefulWidget {
 class _StoreListState extends State<StoreList> {
   @override
   Widget build(BuildContext context) {
-    return Center(
-        child: FutureBuilder<Store>(
-            future: getStoreList(),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return ListView.builder(
-                    physics: AlwaysScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemBuilder: (context, position) {
-                      return GestureDetector(
-                          child: Container(
-                              margin: EdgeInsets.all(10),
-                              height: 80,
-                              width: 80,
-                              color: Colors.grey[800],
-                              child: Column(
-                                children: <Widget>[
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: <Widget>[
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: <Widget>[
-                                          Row(children: [
-                                            SizedBox(
-                                              width: 10,
-                                            ),
-                                            Text(
-                                              snapshot.data!.data[position]
-                                                  .storeName,
-                                              style: TextStyle(
-                                                  fontSize: 20.0,
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ]),
-                                          SizedBox(
-                                            height: 5,
-                                          ),
-                                          Row(
-                                            children: [
-                                              SizedBox(
-                                                width: 5,
-                                              ),
-                                              Icon(
-                                                Icons.share_location_outlined,
-                                                size: 35.0,
-                                                color: Colors.grey,
-                                              ),
-                                              SizedBox(
-                                                width: 5,
-                                              ),
-                                              Text(
-                                                snapshot.data!.data[position]
-                                                    .storeAddress,
-                                                style: TextStyle(
-                                                  fontSize: 18.0,
-                                                  color: Colors.white,
-                                                ),
-                                              ),
-                                            ],
-                                          )
-                                        ],
+    return FutureBuilder<Store>(
+      future: getStoreList(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return ListView.builder(
+              physics: AlwaysScrollableScrollPhysics(),
+              shrinkWrap: true,
+              scrollDirection: Axis.vertical,
+              itemBuilder: (context, position) {
+                return GestureDetector(
+                    child: Container(
+                        margin: EdgeInsets.all(10),
+                        height: 80,
+                        width: 80,
+                        color: Colors.grey[800],
+                        child: Column(
+                          children: <Widget>[
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Row(children: [
+                                      SizedBox(
+                                        width: 10,
                                       ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(5.0),
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: <Widget>[
-                                            Icon(
-                                              Icons.arrow_right_alt_sharp,
-                                              size: 35.0,
-                                              color: Colors.grey,
-                                            ),
-                                          ],
+                                      Text(
+                                        snapshot.data!.data[position].storeName,
+                                        style: TextStyle(
+                                            fontSize: 20.0,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ]),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    Row(
+                                      children: [
+                                        SizedBox(
+                                          width: 5,
                                         ),
+                                        Icon(
+                                          Icons.share_location_outlined,
+                                          size: 35.0,
+                                          color: Colors.grey,
+                                        ),
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        Text(
+                                          snapshot.data!.data[position]
+                                              .storeAddress,
+                                          style: TextStyle(
+                                            fontSize: 18.0,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(5.0),
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: <Widget>[
+                                      Icon(
+                                        Icons.arrow_right_alt_sharp,
+                                        size: 35.0,
+                                        color: Colors.grey,
                                       ),
                                     ],
                                   ),
-                                ],
-                              )),
-                          onTap: () {
-                            Route route = MaterialPageRoute(
-                                builder: (context) => MenuFragment());
-                            Navigator.push(context, route);
-                          });
-                    },
-                    itemCount: snapshot.data!.data.length);
-              }
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            }));
+                                ),
+                              ],
+                            ),
+                          ],
+                        )),
+                    onTap: () {
+                      Route route = MaterialPageRoute(
+                          builder: (context) => MenuFragment());
+                      Navigator.push(context, route);
+                    });
+              },
+              itemCount: snapshot.data!.data.length);
+        }
+        return Center(
+          child: CircularProgressIndicator(),
+        );
+      },
+    );
   }
 }
 
