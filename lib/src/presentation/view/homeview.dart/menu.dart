@@ -25,6 +25,7 @@ class _MenuFragmentState extends State<MenuFragment> {
           width: MediaQuery.of(context).size.width,
           child: Column(children: [
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Container(
                   height: 30,

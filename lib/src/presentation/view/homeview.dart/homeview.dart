@@ -47,7 +47,7 @@ class _HomeViewState extends State<HomeView> {
                 return Container(
                   color: Colors.black,
                   margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
-                  height: MediaQuery.of(context).size.height,
+                  // height: MediaQuery.of(context).size.height,
                   width: MediaQuery.of(context).size.width,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -87,7 +87,7 @@ class _HomeViewState extends State<HomeView> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          RaisedButton(
+                          MaterialButton(
                             color: Colors.red,
                             onPressed: () {
                               Route route = MaterialPageRoute(
@@ -107,7 +107,7 @@ class _HomeViewState extends State<HomeView> {
                             ),
                           ),
                           SizedBox(width: 10),
-                          RaisedButton(
+                          MaterialButton(
                             color: Colors.red,
                             onPressed: () {
                               Route route = MaterialPageRoute(
@@ -176,24 +176,12 @@ class _HomeViewState extends State<HomeView> {
                               ]);
                             }),
                       ),
-                      Container(
-                        width: MediaQuery.of(context).size.width,
-                        margin: EdgeInsets.only(bottom: 1),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              child: Text(
-                                story!.data.description,
-                                style: TextStyle(
-                                    fontSize: 14.0,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.normal),
-                                maxLines: 40,
-                              ),
-                            ),
-                          ],
-                        ),
+                      Text(
+                        story!.data.description,
+                        style: TextStyle(
+                            fontSize: 14.0,
+                            color: Colors.white,
+                            fontWeight: FontWeight.normal),
                       ),
                     ],
                   ),

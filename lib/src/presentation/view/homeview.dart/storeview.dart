@@ -27,42 +27,44 @@ class _StoreFragmentState extends State<StoreFragment> {
   Widget build(BuildContext context) {
     return Material(
         child: Scaffold(
-            body: Container(
-                color: Colors.black,
-                // height: MediaQuery.of(context).size.height,
-                width: MediaQuery.of(context).size.width,
-                child: Column(children: [
-                  Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                    Container(
-                      height: 40,
-                      width: 40,
-                      color: Colors.red,
-                      child: IconButton(
-                        alignment: Alignment.topLeft,
-                        icon: Icon(Icons.arrow_back),
-                        iconSize: 28.0,
-                        color: Colors.white,
-                        onPressed: () {},
-                      ),
-                    ),
-                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                      Image.asset(
-                        'assets/kick_inn_logo.png',
-                        height: 100,
-                      ),
-                    ]),
-                    Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-                      IconButton(
-                        alignment: Alignment.topRight,
-                        icon: Icon(Icons.card_travel_sharp),
-                        iconSize: 28.0,
-                        color: Colors.white,
-                        onPressed: () {},
-                      )
-                    ]),
-                  ]),
-                  StoreList()
-                ]))));
+            backgroundColor: Colors.black,
+            body: SingleChildScrollView(
+                physics: AlwaysScrollableScrollPhysics(),
+                scrollDirection: Axis.vertical,
+                child: Container(
+                    color: Colors.black,
+                    // height: MediaQuery.of(context).size.height,
+                    width: MediaQuery.of(context).size.width,
+                    child: Column(children: [
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Container(
+                              height: 40,
+                              width: 40,
+                              color: Colors.red,
+                              child: IconButton(
+                                alignment: Alignment.topLeft,
+                                icon: Icon(Icons.arrow_back),
+                                iconSize: 28.0,
+                                color: Colors.white,
+                                onPressed: () {},
+                              ),
+                            ),
+                            Image.asset(
+                              'assets/kick_inn_logo.png',
+                              height: 100,
+                            ),
+                            IconButton(
+                              alignment: Alignment.topRight,
+                              icon: Icon(Icons.card_travel_sharp),
+                              iconSize: 28.0,
+                              color: Colors.white,
+                              onPressed: () {},
+                            ),
+                          ]),
+                      StoreList()
+                    ])))));
   }
 }
 
@@ -82,6 +84,7 @@ class _StoreListState extends State<StoreList> {
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return ListView.builder(
+                    physics: AlwaysScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemBuilder: (context, position) {
                       return GestureDetector(
