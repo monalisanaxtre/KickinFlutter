@@ -39,7 +39,9 @@ class _StoreFragmentState extends State<StoreFragment> {
                 icon: Icon(Icons.arrow_back),
                 iconSize: 28.0,
                 color: Colors.white,
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pop(context, false);
+                },
               ),
             ),
             Image.asset(
@@ -78,7 +80,6 @@ class _StoreListState extends State<StoreList> {
               shrinkWrap: true,
               scrollDirection: Axis.vertical,
               itemBuilder: (context, position) {
-
                 return GestureDetector(
                     child: Container(
                         margin: EdgeInsets.all(10),
@@ -152,7 +153,7 @@ class _StoreListState extends State<StoreList> {
                           ],
                         )),
                     onTap: () {
-        StoreFragment.storeId = snapshot.data!.data[position].id;
+                      StoreFragment.storeId = snapshot.data!.data[position].id;
 
                       Route route = MaterialPageRoute(
                           builder: (context) => MenuFragment());
