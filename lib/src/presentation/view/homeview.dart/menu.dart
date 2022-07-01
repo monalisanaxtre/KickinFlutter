@@ -7,6 +7,7 @@ import 'dart:convert';
 import 'package:kickinn/src/presentation/view/homeview.dart/menucategoryfragment.dart';
 
 class MenuFragment extends StatefulWidget {
+  
   MenuFragment({Key? key}) : super(key: key);
 
   @override
@@ -73,6 +74,7 @@ class _MenuFragmentState extends State<MenuFragment> {
 }
 
 class MenuList extends StatefulWidget {
+  static String? catagoryId;
   MenuList({Key? key}) : super(key: key);
 
   @override
@@ -89,6 +91,7 @@ class _MenuListState extends State<MenuList> {
               if (snapshot.hasData) {
                 return ListView.builder(
                     shrinkWrap: true,
+                    itemCount: snapshot.data!.data.length,
                     itemBuilder: (context, position) {
                       return GestureDetector(
                           child: Container(
@@ -131,12 +134,14 @@ class _MenuListState extends State<MenuList> {
                             ),
                           ),
                           onTap: () {
+                      MenuList.catagoryId = snapshot.data!.data[position].categoryId;
+
                             Route route = MaterialPageRoute(
                                 builder: (context) => MenuCategory());
                             Navigator.push(context, route);
                           });
                     },
-                    itemCount: snapshot.data!.data.length);
+                    );
               }
               return Center(
                 child: CircularProgressIndicator(),

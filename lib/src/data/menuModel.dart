@@ -31,7 +31,7 @@ class Menu {
 }
 
 class Datum {
-      String categoryId;
+    String categoryId;
     String name;
     String icon;
     Datum({

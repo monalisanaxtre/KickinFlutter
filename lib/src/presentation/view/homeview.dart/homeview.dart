@@ -40,7 +40,7 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
         scrollDirection: Axis.vertical,
-        child: FutureBuilder<RecommendModel>(
+        child:FutureBuilder<RecommendModel>(
             future: getrecommendFood(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {

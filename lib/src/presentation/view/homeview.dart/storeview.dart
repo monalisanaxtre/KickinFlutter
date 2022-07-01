@@ -6,6 +6,7 @@ import 'dart:convert';
 import '../../../data/storemodel.dart';
 
 class StoreFragment extends StatefulWidget {
+  static String? storeId;
   @override
   _StoreFragmentState createState() => _StoreFragmentState();
 }
@@ -77,6 +78,7 @@ class _StoreListState extends State<StoreList> {
               shrinkWrap: true,
               scrollDirection: Axis.vertical,
               itemBuilder: (context, position) {
+
                 return GestureDetector(
                     child: Container(
                         margin: EdgeInsets.all(10),
@@ -150,6 +152,8 @@ class _StoreListState extends State<StoreList> {
                           ],
                         )),
                     onTap: () {
+        StoreFragment.storeId = snapshot.data!.data[position].id;
+
                       Route route = MaterialPageRoute(
                           builder: (context) => MenuFragment());
                       Navigator.push(context, route);

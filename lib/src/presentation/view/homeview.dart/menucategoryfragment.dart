@@ -3,6 +3,7 @@ import 'package:kickinn/servicewrapper/menucategory.dart';
 import 'package:kickinn/src/data/menucategory.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:kickinn/src/presentation/view/homeview.dart/menu.dart';
 import 'package:kickinn/src/presentation/view/homeview.dart/storeview.dart';
 
 class MenuCategory extends StatefulWidget {
@@ -84,9 +85,10 @@ class _MenuCategoryListState extends State<MenuCategoryList> {
     var size = MediaQuery.of(context).size;
     final double itemHeight = (size.height - kToolbarHeight - 24) / 2.1;
     final double itemWidth = size.width / 2;
-    return Center(
+    return Expanded(
         child: FutureBuilder<MenuCategoryModel>(
-            future: getMenuCategoryList("1", "23"),
+            // future: getMenuCategoryList("1", "23"),
+            future: getMenuCategoryList(MenuList.catagoryId,StoreFragment.storeId),
             // ignore: missing_return
             builder: (context, snapshot) {
               if (snapshot.hasData) {
@@ -101,7 +103,8 @@ class _MenuCategoryListState extends State<MenuCategoryList> {
                               padding: EdgeInsets.fromLTRB(9, 4, 9, 0),
                               child: Container(
                                   child: InkWell(
-                                      child: Column(children: <Widget>[
+                                      child: Column(
+                                        children: <Widget>[
                                         Container(
                                           child: Card(
                                             semanticContainer: true,
@@ -121,19 +124,20 @@ class _MenuCategoryListState extends State<MenuCategoryList> {
                                             ),
                                           ),
                                         ),
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: <Widget>[
-                                            Text(
-                                              snapshot
-                                                  .data!.data[index].itemName
-                                                  .toUpperCase(),
-                                              overflow: TextOverflow.ellipsis,
-                                            ),
-                                            SizedBox(height: 3),
-                                          ],
+                                        Expanded(
+                                          child: Text(
+                                            snapshot
+                                                .data!.data[index].itemName
+                                                .toUpperCase(),
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 2,
+                                          
+                                             textAlign: TextAlign.center,
+                                            style: TextStyle(color: Colors.white,
+                                            fontWeight: FontWeight.bold),
+                                          ),
                                         ),
+                                        SizedBox(height: 3),
                                       ]),
                                       onTap: () {}))));
                     });
