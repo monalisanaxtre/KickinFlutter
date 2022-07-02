@@ -56,8 +56,20 @@ class _HomeViewState extends State<HomeView> {
                         height: 20,
                       ),
                       Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
+                            Container(
+                              height: 40,
+                              width: 40,
+                              color: Colors.red,
+                              child: IconButton(
+                                alignment: Alignment.topLeft,
+                                icon: Icon(Icons.arrow_back),
+                                iconSize: 28.0,
+                                color: Colors.white,
+                                onPressed: () {},
+                              ),
+                            ),
                             Image.asset(
                               'assets/kick_inn_logo.png',
                               height: 100,
@@ -141,7 +153,7 @@ class _HomeViewState extends State<HomeView> {
                       SizedBox(width: 10),
                       story == null
                           ? CircularProgressIndicator(
-                              color: Colors.yellow,
+                              color: Colors.red,
                             )
                           : Container(
                               margin:

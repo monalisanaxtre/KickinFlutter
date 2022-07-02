@@ -1,20 +1,18 @@
-import 'package:kickinn/src/presentation/view/homeview.dart/menudetail.dart';
-import 'package:http/http.dart' as http;
 import 'dart:convert';
-import '../src/data/menudetailmodel.dart';
+import 'package:http/http.dart' as http;
+import 'package:kickinn/src/data/getallbagitemmodel.dart';
 
-Future<MenuDeatilModel> getMenuDetails(storeMenuId, storeId, userId) async {
+Future<GetAllBagItem> getAllBagItem(userId, currentTime) async {
   var data = {
-    'store_menu_id': storeMenuId,
-    'store_id': storeId,
     'user_id': userId,
+    'current_time': currentTime,
   };
   var headers = {
     "content-type": "application/json",
   };
   var body = data;
   var response = await http.post(
-      Uri.parse('https://www.naxtre.com/kickin-inn_dev/api/singleItemDetails'),
+      Uri.parse('https://www.naxtre.com/kickin-inn_dev/api/get_all_bag_items'),
       headers: headers,
       body: json.encode(body));
   var jsonString = response.body;
@@ -22,9 +20,9 @@ Future<MenuDeatilModel> getMenuDetails(storeMenuId, storeId, userId) async {
 
   try {
     if (response.statusCode == 200 && response.body.contains("data")) {
-      return MenuDeatilModel.fromJson(jsonMap);
+      return GetAllBagItem.fromJson(jsonMap);
     } else {
-      return MenuDeatilModel.fromJson(jsonMap);
+      return GetAllBagItem.fromJson(jsonMap);
     }
   } catch (_) {
     throw Exception("Failed to load data");

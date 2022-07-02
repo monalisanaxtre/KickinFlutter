@@ -5,9 +5,9 @@ import 'package:kickinn/src/presentation/view/homeview.dart/menu.dart';
 import 'dart:convert';
 
 import 'package:kickinn/src/presentation/view/homeview.dart/menucategoryfragment.dart';
+import 'package:kickinn/src/presentation/view/homeview.dart/pickuporder.dart';
 
 class MenuFragment extends StatefulWidget {
-  
   MenuFragment({Key? key}) : super(key: key);
 
   @override
@@ -48,12 +48,15 @@ class _MenuFragmentState extends State<MenuFragment> {
                   height: 100,
                 ),
                 IconButton(
-                  alignment: Alignment.centerRight,
-                  icon: Icon(Icons.card_travel_sharp),
-                  iconSize: 28.0,
-                  color: Colors.white,
-                  onPressed: () {},
-                )
+                    alignment: Alignment.centerRight,
+                    icon: Icon(Icons.card_travel_sharp),
+                    iconSize: 28.0,
+                    color: Colors.white,
+                    onPressed: () {
+                      Route route = MaterialPageRoute(
+                          builder: (context) => PickupOrder());
+                      Navigator.push(context, route);
+                    })
               ],
             ),
             SizedBox(
@@ -90,58 +93,59 @@ class _MenuListState extends State<MenuList> {
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: snapshot.data!.data.length,
-                    itemBuilder: (context, position) {
-                      return GestureDetector(
-                          child: Container(
-                            margin: EdgeInsets.all(10),
-                            height: 80,
-                            width: 80,
-                            color: Colors.grey[800],
-                            child: Column(
-                              children: <Widget>[
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    SizedBox(
-                                      width: 5,
-                                    ),
-                                    Container(
-                                      height: 50,
-                                      width: 50,
-                                      decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                          fit: BoxFit.fill,
-                                          image: NetworkImage(snapshot
-                                              .data!.data[position].icon),
-                                        ),
+                  shrinkWrap: true,
+                  itemCount: snapshot.data!.data.length,
+                  itemBuilder: (context, position) {
+                    return GestureDetector(
+                        child: Container(
+                          margin: EdgeInsets.all(10),
+                          height: 80,
+                          width: 80,
+                          color: Colors.grey[800],
+                          child: Column(
+                            children: <Widget>[
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  Container(
+                                    height: 50,
+                                    width: 50,
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        fit: BoxFit.fill,
+                                        image: NetworkImage(
+                                            snapshot.data!.data[position].icon),
                                       ),
                                     ),
-                                    SizedBox(
-                                      width: 5,
+                                  ),
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  Text(
+                                    snapshot.data!.data[position].name,
+                                    style: TextStyle(
+                                      fontSize: 18.0,
+                                      color: Colors.white,
                                     ),
-                                    Text(
-                                      snapshot.data!.data[position].name,
-                                      style: TextStyle(
-                                        fontSize: 18.0,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ],
-                                )
-                              ],
-                            ),
+                                  ),
+                                ],
+                              )
+                            ],
                           ),
-                          onTap: () {
-                      MenuList.catagoryId = snapshot.data!.data[position].categoryId;
+                        ),
+                        onTap: () {
+                          MenuList.catagoryId =
+                              snapshot.data!.data[position].categoryId;
 
-                            Route route = MaterialPageRoute(
-                                builder: (context) => MenuCategory());
-                            Navigator.push(context, route);
-                          });
-                    },
-                    );
+                          Route route = MaterialPageRoute(
+                              builder: (context) => MenuCategory());
+                          Navigator.push(context, route);
+                        });
+                  },
+                );
               }
               return Center(
                 child: CircularProgressIndicator(),

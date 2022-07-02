@@ -4,9 +4,11 @@ import 'package:kickinn/src/data/menucategory.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:kickinn/src/presentation/view/homeview.dart/menu.dart';
+import 'package:kickinn/src/presentation/view/homeview.dart/menudetail.dart';
 import 'package:kickinn/src/presentation/view/homeview.dart/storeview.dart';
 
 class MenuCategory extends StatefulWidget {
+  static String? storeMenuId;
   MenuCategory({Key? key}) : super(key: key);
 
   @override
@@ -28,8 +30,8 @@ class _MenuCategoryState extends State<MenuCategory> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Container(
-                  height: 30,
-                  width: 30,
+                  height: 40,
+                  width: 40,
                   color: Colors.red,
                   child: IconButton(
                     alignment: Alignment.topLeft,
@@ -88,7 +90,8 @@ class _MenuCategoryListState extends State<MenuCategoryList> {
     return Expanded(
         child: FutureBuilder<MenuCategoryModel>(
             // future: getMenuCategoryList("1", "23"),
-            future: getMenuCategoryList(MenuList.catagoryId,StoreFragment.storeId),
+            future:
+                getMenuCategoryList(MenuList.catagoryId, StoreFragment.storeId),
             // ignore: missing_return
             builder: (context, snapshot) {
               if (snapshot.hasData) {
@@ -103,19 +106,18 @@ class _MenuCategoryListState extends State<MenuCategoryList> {
                               padding: EdgeInsets.fromLTRB(9, 4, 9, 0),
                               child: Container(
                                   child: InkWell(
-                                      child: Column(
-                                        children: <Widget>[
+                                      child: Column(children: <Widget>[
                                         Container(
                                           child: Card(
                                             semanticContainer: true,
                                             clipBehavior:
                                                 Clip.antiAliasWithSaveLayer,
                                             shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        10.0)),
+                                              borderRadius:
+                                                  BorderRadius.circular(6.0),
+                                            ),
                                             child: AspectRatio(
-                                              aspectRatio: 20.0 / 18.0,
+                                              aspectRatio: 16 / 9.0,
                                               child: Image.network(
                                                 snapshot
                                                     .data!.data[index].image,
@@ -126,20 +128,25 @@ class _MenuCategoryListState extends State<MenuCategoryList> {
                                         ),
                                         Expanded(
                                           child: Text(
-                                            snapshot
-                                                .data!.data[index].itemName
+                                            snapshot.data!.data[index].itemName
                                                 .toUpperCase(),
                                             overflow: TextOverflow.ellipsis,
                                             maxLines: 2,
-                                          
-                                             textAlign: TextAlign.center,
-                                            style: TextStyle(color: Colors.white,
-                                            fontWeight: FontWeight.bold),
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold),
                                           ),
                                         ),
                                         SizedBox(height: 3),
                                       ]),
-                                      onTap: () {}))));
+                                      onTap: () {
+                                        MenuCategory.storeMenuId = snapshot
+                                            .data!.data[index].storeMenuId;
+                                        Route route = MaterialPageRoute(
+                                            builder: (context) => MenuDetail());
+                                        Navigator.push(context, route);
+                                      }))));
                     });
               }
               return Center(

@@ -11,6 +11,7 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
+  static String? userId;
   LoginScreen({Key? key}) : super(key: key);
 
   @override
@@ -41,7 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
         backgroundColor: Colors.black,
         body: SingleChildScrollView(
-            child: Container(
+            child: GestureDetector(child:Container(
                 color: Colors.black,
                 margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
                 height: MediaQuery.of(context).size.height,
@@ -260,7 +261,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       },
                     )
                   ])
-                ])))));
+                ]))),
+                onTap:(){
+              
+
+                } ,
+                )
+                )
+                );
   }
 
   savePref(int value, String name, String email, int id) async {
