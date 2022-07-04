@@ -141,11 +141,14 @@ class _MenuCategoryListState extends State<MenuCategoryList> {
                                         SizedBox(height: 3),
                                       ]),
                                       onTap: () {
-                                        MenuCategory.storeMenuId = snapshot
-                                            .data!.data[index].storeMenuId;
-                                        Route route = MaterialPageRoute(
-                                            builder: (context) => MenuDetail());
-                                        Navigator.push(context, route);
+                                        setState(() {
+                                          MenuCategory.storeMenuId = snapshot
+                                              .data!.data[index].storeMenuId;
+                                          Route route = MaterialPageRoute(
+                                              builder: (context) =>
+                                                  MenuDetail());
+                                          Navigator.push(context, route);
+                                        });
                                       }))));
                     });
               }

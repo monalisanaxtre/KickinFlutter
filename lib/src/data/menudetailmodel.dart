@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final menuDeatilModel = menuDeatilModelFromJson(jsonString);
-
 import 'dart:convert';
 
 MenuDeatilModel menuDeatilModelFromJson(String str) =>
