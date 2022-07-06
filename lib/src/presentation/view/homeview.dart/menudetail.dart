@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kickinn/servicewrapper/addtobag.dart';
 import 'package:kickinn/servicewrapper/menudetail.dart';
 import 'package:kickinn/src/data/menudetailmodel.dart';
 import 'package:kickinn/src/presentation/view/homeview.dart/menucategoryfragment.dart';
@@ -7,6 +8,7 @@ import 'package:kickinn/src/presentation/view/homeview.dart/storeview.dart';
 import 'package:kickinn/src/presentation/view/login.dart';
 
 class MenuDetail extends StatefulWidget {
+  static String? qty;
   MenuDetail({Key? key}) : super(key: key);
 
   @override
@@ -15,12 +17,11 @@ class MenuDetail extends StatefulWidget {
 
 class _MenuDetailState extends State<MenuDetail> {
   MenuDeatilModel? menuSingleDetails;
-
+  var number = 0;
   @override
   void initState() {
     super.initState();
-
-    getMenuDetails(MenuCategory.storeMenuId, StoreFragment.storeId, LoginScreen.userId)
+    getMenuDetails(MenuCategory.storeMenuId, StoreFragment.storeId, "23")
         .then((menuDetails) {
       setState(() {
         // menuDetails = menuDetails;
@@ -48,7 +49,7 @@ class _MenuDetailState extends State<MenuDetail> {
                 padding: EdgeInsets.all(16),
                 child: Container(
                     child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                       Row(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -62,7 +63,9 @@ class _MenuDetailState extends State<MenuDetail> {
                                 icon: Icon(Icons.arrow_back),
                                 iconSize: 28.0,
                                 color: Colors.white,
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
                               ),
                             ),
                             SizedBox(
@@ -95,12 +98,16 @@ class _MenuDetailState extends State<MenuDetail> {
                       SizedBox(
                         height: 10,
                       ),
-                      Text(
-                        menuSingleDetails!.data.itemName,
-                        style: TextStyle(
-                            color: Colors.red,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold),
+                      Row(
+                        children: [
+                          Text(
+                            menuSingleDetails!.data.itemName,
+                            style: TextStyle(
+                                color: Colors.red,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ],
                       ),
                       SizedBox(
                         height: 10,
@@ -129,12 +136,16 @@ class _MenuDetailState extends State<MenuDetail> {
                       SizedBox(
                         height: 10,
                       ),
-                      Text(
-                        menuSingleDetails!.data.itemQuantity,
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold),
+                      Row(
+                        children: [
+                          Text(
+                            menuSingleDetails!.data.itemQuantity,
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ],
                       ),
                       SizedBox(
                         height: 20,
@@ -155,25 +166,7 @@ class _MenuDetailState extends State<MenuDetail> {
                                 SizedBox(
                                   width: 50,
                                 ),
-                                _itemCount != 0
-                                    ? new IconButton(
-                                        icon: new Icon(Icons.remove,
-                                            color: Color.fromARGB(
-                                                255, 247, 243, 243)),
-                                        onPressed: () =>
-                                            setState(() => _itemCount--),
-                                      )
-                                    : new Container(),
-                                new Text(
-                                  _itemCount.toString(),
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                new IconButton(
-                                    icon: new Icon(Icons.add,
-                                        color:
-                                            Color.fromARGB(255, 247, 243, 243)),
-                                    onPressed: () =>
-                                        setState(() => _itemCount++))
+                                addToCartCounter(),
                               ],
                             )
                           ]),
@@ -199,8 +192,54 @@ class _MenuDetailState extends State<MenuDetail> {
                             textColor: Colors.white,
                             child: const Text('Add to Bag',
                                 style: TextStyle(fontSize: 20)),
-                            onPressed: () {},
+                            onPressed: () {
+                              MenuDetail.qty = menuSingleDetails!.data.qty;
+                              addtoBag(
+                                  "23",
+                                  StoreFragment.storeId,
+                                  MenuCategory.storeMenuId,
+                                  MenuDetail.qty,
+                                  false);
+                            },
                           ))),
                     ]))));
+  }
+
+  Widget addToCartCounter() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: <Widget>[
+        _decrementButton(),
+        Text(
+          '$number',
+          style: TextStyle(fontSize: 18.0, color: Colors.white),
+        ),
+        _incrementButton(),
+      ],
+    );
+  }
+
+  Widget _incrementButton() {
+    return FloatingActionButton(
+      child: Icon(Icons.add, color: Colors.black),
+      backgroundColor: Colors.white,
+      onPressed: () {
+        setState(() {
+          number = number + 1;
+        });
+      },
+    );
+  }
+
+  Widget _decrementButton() {
+    return FloatingActionButton(
+        onPressed: () {
+          setState(() {
+            number = number - 1;
+          });
+        },
+        child: new Icon(const IconData(0xe15b, fontFamily: 'MaterialIcons'),
+            color: Colors.black),
+        backgroundColor: Colors.white);
   }
 }

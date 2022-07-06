@@ -40,7 +40,7 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
         scrollDirection: Axis.vertical,
-        child:FutureBuilder<RecommendModel>(
+        child: FutureBuilder<RecommendModel>(
             future: getrecommendFood(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
@@ -67,7 +67,9 @@ class _HomeViewState extends State<HomeView> {
                                 icon: Icon(Icons.arrow_back),
                                 iconSize: 28.0,
                                 color: Colors.white,
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
                               ),
                             ),
                             Image.asset(
