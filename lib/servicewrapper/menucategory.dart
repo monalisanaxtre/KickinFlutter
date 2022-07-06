@@ -5,14 +5,14 @@ import 'dart:convert';
 import '../src/presentation/view/homeview.dart/menu.dart';
 import '../src/presentation/view/homeview.dart/storeview.dart';
 
-Future<MenuCategoryModel> getMenuCategoryList(
-    String? catagotyId, String? storeId) async {
-  var data = {
+Future<MenuCategoryModel> getMenuCategoryList(String? catagotyId,String? storeId) async {
+  var data={
     'category_id': catagotyId,
-    'store_id': storeId,
+    'store_id':storeId, 
   };
-  var body = data;
+  var body=data;
   var response = await http.post(
+
       Uri.parse('https://www.naxtre.com/kickin-inn_dev/api/items_by_category'),
       body: json.encode(body));
 

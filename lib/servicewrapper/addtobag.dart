@@ -3,10 +3,14 @@ import 'dart:convert';
 import 'package:kickinn/src/data/addtocartmodel.dart';
 import 'package:http/http.dart' as http;
 
-Future<AddToCart> addtoBag(
-    userId, storeId, storeMenuId, qty, addOnPresence) async {
+Future<AddToCart> getAllBagItem(
+  userId,
+  storeId,
+  storeMenuId,
+  qty,
+) async {
   var data = {
-    "user_id": userId,
+    "user_id": "25",
     "store_id": storeId,
     "store_menu_id": storeMenuId,
     "qty": qty,
