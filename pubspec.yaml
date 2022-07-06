@@ -38,6 +38,8 @@ dependencies:
   firebase_messaging: 
   cloud_firestore: 
   webview_flutter: ^3.0.4
+  readmore: ^2.1.0
+  flutter_rating_bar: ^4.0.1
   
 
 dev_dependencies:

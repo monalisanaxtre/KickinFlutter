@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:kickinn/servicewrapper/recentOrder.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:kickinn/src/data/recentOrder.dart';
+import 'package:kickinn/src/presentation/view/login.dart';
+import 'package:readmore/readmore.dart';
+import '../../../servicewrapper/recentOrder.dart';
 
 class OrderFragment extends StatefulWidget {
   const OrderFragment({Key? key}) : super(key: key);
@@ -10,6 +13,11 @@ class OrderFragment extends StatefulWidget {
 }
 
 class _OrderFragmentState extends State<OrderFragment> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -22,14 +30,34 @@ class _OrderFragmentState extends State<OrderFragment> {
                     itemCount: snapshot.data!.data.length,
                     itemBuilder: (context, position) {
                       return Container(
-                          height: 125,
+                          margin: EdgeInsets.all(10),
+                          height: 150,
                           width: 120,
+                          color: Colors.blueGrey,
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
+                                // ReadMoreText(
+                                //   snapshot.data!.data[position]
+                                //       .itemDetails[position].itemName,
+                                //   trimLines: 2,
+                                //   colorClickableText: Colors.pink,
+                                //   trimMode: TrimMode.Line,
+                                //   trimCollapsedText: 'Show more',
+                                //   trimExpandedText: 'Show less',
+                                //   moreStyle: TextStyle(
+                                //       fontSize: 14,
+                                //       fontWeight: FontWeight.bold),
+                                // ),
                                 Text(
-                                  snapshot.data!.data[position]
-                                      .itemDetails[position].itemName,
+                                  snapshot.data!.data[position].storeName,
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  snapshot.data!.data[position].storeAddress,
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 16,
@@ -45,18 +73,11 @@ class _OrderFragmentState extends State<OrderFragment> {
                                 SizedBox(
                                   height: 5,
                                 ),
-                                Text(
-                                  " // snapshot.data!.data[position].storeName!,",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold),
-                                ),
                                 SizedBox(
                                   height: 5,
                                 ),
                                 Text(
-                                  snapshot.data!.data![position].orderPlacedOn!,
+                                  snapshot.data!.data[position].orderPlacedOn,
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 16,
@@ -64,6 +85,17 @@ class _OrderFragmentState extends State<OrderFragment> {
                                 ),
                                 SizedBox(
                                   width: 8,
+                                ),
+                                RatingBarIndicator(
+                                  rating: double.parse(
+                                      'snapshot.data!.data[position].rating'),
+                                  itemBuilder: (context, index) => Icon(
+                                    Icons.star,
+                                    color: Colors.amber,
+                                  ),
+                                  itemCount: 5,
+                                  itemSize: 50.0,
+                                  direction: Axis.horizontal,
                                 ),
                               ]));
                     });

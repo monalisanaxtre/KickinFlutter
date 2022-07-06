@@ -208,7 +208,53 @@ class _PickupOrderState extends State<PickupOrder> {
                       return Center(
                         child: CircularProgressIndicator(),
                       );
-                    })
+                    }),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      MaterialButton(
+                        color: Colors.white,
+                        onPressed: () {
+                          // Route route = MaterialPageRoute(
+                          //     builder: (context) => WebViewStack());
+                          // Navigator.push(context, route);
+                        },
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.35,
+                          child: Text(
+                            "Order More",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 10),
+                      MaterialButton(
+                        color: Colors.red,
+                        onPressed: () {
+                          // Route route = MaterialPageRoute(
+                          //     builder: (context) => ());
+                          // Navigator.push(context, route);
+                        },
+                        child: SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.35,
+                            child: Text(
+                              "Check Out",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold),
+                            )),
+                      ),
+                    ],
+                  ),
+                ),
               ],
             )));
   }

@@ -3,10 +3,7 @@ import 'dart:convert';
 
 import 'package:kickinn/src/data/recentOrder.dart';
 
-
-
-Future<RecentOrder> getRecentOrder(
-    String? userId) async {
+Future<RecentOrder> getRecentOrder(String? userId) async {
   var data = {
     'user_id': userId,
   };
