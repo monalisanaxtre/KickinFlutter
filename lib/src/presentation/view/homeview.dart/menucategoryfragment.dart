@@ -38,7 +38,7 @@ class _MenuCategoryState extends State<MenuCategory> {
                     icon: Icon(Icons.arrow_back),
                     iconSize: 28.0,
                     color: Colors.white,
-                    onPressed: () {        Navigator.pop(context);},
+                    onPressed: () {},
                   ),
                 ),
                 SizedBox(
@@ -152,7 +152,6 @@ class _MenuCategoryListState extends State<MenuCategoryList> {
                                       }))));
                     });
               }
-
               return Center(
                 child: CircularProgressIndicator(),
               );

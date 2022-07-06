@@ -37,7 +37,7 @@ class _MenuFragmentState extends State<MenuFragment> {
                     icon: Icon(Icons.arrow_back),
                     iconSize: 28.0,
                     color: Colors.white,
-                    onPressed: () {        Navigator.pop(context);},
+                    onPressed: () {},
                   ),
                 ),
                 SizedBox(
