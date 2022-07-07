@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:kickinn/src/presentation/view/homeview.dart/homeview.dart';
 import 'package:kickinn/src/presentation/view/homeview.dart/more.dart';
+import 'package:kickinn/src/view/view/locationfragment.dart';
 import 'package:kickinn/src/view/view/orderfragment.dart';
 
 class Home extends StatefulWidget {
@@ -17,7 +18,7 @@ class _HomeState extends State<Home> {
   final List<Widget> _children = [
     HomeView(),
     OrderFragment(),
-    OrderFragment(),
+    LocationFragment(),
     MoreFragment()
   ];
 

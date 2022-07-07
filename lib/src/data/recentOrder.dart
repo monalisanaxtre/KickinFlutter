@@ -72,6 +72,10 @@ class Datum {
         "rating status": ratingStatus,
         "item_details": List<dynamic>.from(itemDetails.map((x) => x.toJson())),
       };
+
+  ItemDetails() {
+    itemDetails.join(",\n");
+  }
 }
 
 class ItemDetail {
