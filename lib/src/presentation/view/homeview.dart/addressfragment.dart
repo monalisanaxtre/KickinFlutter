@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:kickinn/src/data/addressmodel.dart';
 
 import '../../../../servicewrapper/addaddress.dart';
@@ -21,6 +22,26 @@ class _AddressFragmentState extends State<AddressFragment> {
   // final TextEditingController message = TextEditingController();
   // String name, email;
   // Future<AddressModel> addressModel;
+
+  @override
+  void initState() {
+    super.initState();
+    // getUserLocation();
+  }
+
+  // Future<Position> locateUser() async {
+  //   return Geolocator()
+  //       .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+  // }
+
+  // getUserLocation() async {
+  //   currentLocation = await locateUser();
+  //   setState(() {
+  //     _center = LatLng(currentLocation.latitude, currentLocation.longitude);
+  //   });
+  //   print('center $_center');
+  // }
+
   bool _validate = false;
   GlobalKey<FormState> _key = new GlobalKey();
   late AddressModel addressModels;
@@ -54,7 +75,9 @@ class _AddressFragmentState extends State<AddressFragment> {
                                     icon: Icon(Icons.arrow_back),
                                     iconSize: 28.0,
                                     color: Colors.white,
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
                                   ),
                                 ),
                                 SizedBox(
