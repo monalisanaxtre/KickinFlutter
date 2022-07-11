@@ -47,14 +47,15 @@ class _MoreFragmentState extends State<MoreFragment> {
                   height: 60,
                   color: Colors.blueGrey,
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      SizedBox(width: 10),
+                      // SizedBox(width: 10),
                       Icon(
                         Icons.person,
                         color: Colors.white,
                         size: 22,
                       ),
-                      SizedBox(width: 30),
+                      // SizedBox(width: 30),
                       Text(
                         "Profile",
                         style: TextStyle(
@@ -62,9 +63,9 @@ class _MoreFragmentState extends State<MoreFragment> {
                             fontSize: 20,
                             fontWeight: FontWeight.bold),
                       ),
-                      SizedBox(
-                        width: 115,
-                      ),
+                      // SizedBox(
+                      //   width: 115,
+                      // ),
                       Icon(
                         Icons.arrow_right,
                         color: Colors.white,
@@ -79,14 +80,15 @@ class _MoreFragmentState extends State<MoreFragment> {
                   height: 60,
                   color: Colors.blueGrey,
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      SizedBox(width: 10),
+                      // SizedBox(width: 10),
                       Icon(
                         Icons.person,
                         color: Colors.white,
                         size: 22,
                       ),
-                      SizedBox(width: 30),
+                      // SizedBox(width: 30),
                       Text(
                         "Sign In",
                         style: TextStyle(
@@ -94,9 +96,9 @@ class _MoreFragmentState extends State<MoreFragment> {
                             fontSize: 20,
                             fontWeight: FontWeight.bold),
                       ),
-                      SizedBox(
-                        width: 115,
-                      ),
+                      // SizedBox(
+                      //   width: 115,
+                      // ),
                       Icon(
                         Icons.arrow_right,
                         color: Colors.white,
@@ -117,14 +119,15 @@ class _MoreFragmentState extends State<MoreFragment> {
                     height: 60,
                     color: Colors.blueGrey,
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        SizedBox(width: 10),
+                        // SizedBox(width: 10),
                         Icon(
                           Icons.alarm,
                           color: Colors.white,
                           size: 22,
                         ),
-                        SizedBox(width: 30),
+                        // SizedBox(width: 30),
                         Text(
                           "Recent",
                           style: TextStyle(
@@ -132,9 +135,9 @@ class _MoreFragmentState extends State<MoreFragment> {
                               fontSize: 20,
                               fontWeight: FontWeight.bold),
                         ),
-                        SizedBox(
-                          width: 115,
-                        ),
+                        // SizedBox(
+                        //   width: 115,
+                        // ),
                         Icon(
                           Icons.arrow_right,
                           color: Colors.white,
@@ -150,14 +153,15 @@ class _MoreFragmentState extends State<MoreFragment> {
                   height: 60,
                   color: Colors.blueGrey,
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      SizedBox(width: 10),
+                      // SizedBox(width: 10),
                       Icon(
                         Icons.location_on,
                         color: Colors.white,
                         size: 22,
                       ),
-                      SizedBox(width: 30),
+                      // SizedBox(width: 30),
                       Text(
                         "Location",
                         style: TextStyle(
@@ -165,9 +169,9 @@ class _MoreFragmentState extends State<MoreFragment> {
                             fontSize: 20,
                             fontWeight: FontWeight.bold),
                       ),
-                      SizedBox(
-                        width: 115,
-                      ),
+                      // SizedBox(
+                      //   width: 115,
+                      // ),
                       Icon(
                         Icons.arrow_right,
                         color: Colors.white,
@@ -182,14 +186,15 @@ class _MoreFragmentState extends State<MoreFragment> {
                   height: 60,
                   color: Colors.blueGrey,
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      SizedBox(width: 10),
+                      // SizedBox(width: 10),
                       Icon(
                         Icons.info,
                         color: Colors.white,
                         size: 22,
                       ),
-                      SizedBox(width: 30),
+                      // SizedBox(width: 30),
                       Text(
                         "About",
                         style: TextStyle(
@@ -197,9 +202,9 @@ class _MoreFragmentState extends State<MoreFragment> {
                             fontSize: 20,
                             fontWeight: FontWeight.bold),
                       ),
-                      SizedBox(
-                        width: 115,
-                      ),
+                      // SizedBox(
+                      //   width: 115,
+                      // ),
                       Icon(
                         Icons.arrow_right,
                         color: Colors.white,
@@ -214,14 +219,15 @@ class _MoreFragmentState extends State<MoreFragment> {
                   height: 60,
                   color: Colors.blueGrey,
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      SizedBox(width: 10),
+                      // SizedBox(width: 10),
                       Icon(
                         Icons.info,
                         color: Colors.white,
                         size: 20,
                       ),
-                      SizedBox(width: 30),
+                      // SizedBox(width: 30),
                       Text(
                         "Contact",
                         style: TextStyle(
@@ -229,9 +235,9 @@ class _MoreFragmentState extends State<MoreFragment> {
                             fontSize: 20,
                             fontWeight: FontWeight.bold),
                       ),
-                      SizedBox(
-                        width: 115,
-                      ),
+                      // SizedBox(
+                      //   width: 115,
+                      // ),
                       Icon(
                         Icons.arrow_right,
                         color: Colors.white,
@@ -252,14 +258,15 @@ class _MoreFragmentState extends State<MoreFragment> {
                     height: 60,
                     color: Colors.blueGrey,
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        SizedBox(width: 10),
+                        // SizedBox(width: 10),
                         Icon(
                           Icons.local_offer,
                           color: Colors.white,
                           size: 22,
                         ),
-                        SizedBox(width: 20),
+                        // SizedBox(width: 20),
                         Text(
                           "Promotional",
                           style: TextStyle(
@@ -267,9 +274,9 @@ class _MoreFragmentState extends State<MoreFragment> {
                               fontSize: 20,
                               fontWeight: FontWeight.bold),
                         ),
-                        SizedBox(
-                          width: 115,
-                        ),
+                        // SizedBox(
+                        //   width: 115,
+                        // ),
                         Icon(
                           Icons.arrow_right,
                           color: Colors.white,
@@ -285,14 +292,15 @@ class _MoreFragmentState extends State<MoreFragment> {
                   height: 60,
                   color: Colors.blueGrey,
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      SizedBox(width: 10),
+                      // SizedBox(width: 10),
                       Icon(
                         Icons.settings,
                         color: Colors.white,
                         size: 22,
                       ),
-                      SizedBox(width: 30),
+                      // SizedBox(width: 30),
                       Text(
                         "Setting",
                         style: TextStyle(
@@ -300,9 +308,9 @@ class _MoreFragmentState extends State<MoreFragment> {
                             fontSize: 20,
                             fontWeight: FontWeight.bold),
                       ),
-                      SizedBox(
-                        width: 115,
-                      ),
+                      // SizedBox(
+                      //   width: 15,
+                      // ),
                       Icon(
                         Icons.arrow_right,
                         color: Colors.white,
