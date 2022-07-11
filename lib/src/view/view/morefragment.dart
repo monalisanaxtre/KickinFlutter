@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kickinn/src/presentation/view/moreview/profile.dart';
 import 'package:kickinn/src/presentation/view/moreview/promotionfragment.dart';
 import 'package:kickinn/src/view/view/orderfragment.dart';
 
@@ -43,36 +44,44 @@ class _MoreFragmentState extends State<MoreFragment> {
                   height: 100,
                 ),
               ]),
-              Container(
-                  height: 60,
-                  color: Colors.blueGrey,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      // SizedBox(width: 10),
-                      Icon(
-                        Icons.person,
-                        color: Colors.white,
-                        size: 22,
-                      ),
-                      // SizedBox(width: 30),
-                      Text(
-                        "Profile",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      // SizedBox(
-                      //   width: 115,
-                      // ),
-                      Icon(
-                        Icons.arrow_right,
-                        color: Colors.white,
-                        size: 30,
-                      ),
-                    ],
-                  )),
+              GestureDetector(
+             
+                onTap: () {
+                  Route route = MaterialPageRoute(
+                      builder: (context) => Profile());
+                  Navigator.push(context, route);
+                },
+                child: Container(
+                    height: 60,
+                    color: Colors.blueGrey,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        // SizedBox(width: 10),
+                        Icon(
+                          Icons.person,
+                          color: Colors.white,
+                          size: 22,
+                        ),
+                        // SizedBox(width: 30),
+                        Text(
+                          "Profile",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        // SizedBox(
+                        //   width: 115,
+                        // ),
+                        Icon(
+                          Icons.arrow_right,
+                          color: Colors.white,
+                          size: 30,
+                        ),
+                      ],
+                    )),
+              ),
               SizedBox(
                 height: 10,
               ),
