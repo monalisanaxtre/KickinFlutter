@@ -3,6 +3,7 @@ import 'package:kickinn/servicewrapper/recommend.dart';
 import 'package:kickinn/src/data/recommend.dart';
 import 'package:kickinn/src/presentation/view/homeview.dart/dineinwebview.dart';
 import 'package:kickinn/src/presentation/view/homeview.dart/storeview.dart';
+// ignore: unused_import
 import 'package:kickinn/src/view/view/orderfragment.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -40,7 +41,7 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
         scrollDirection: Axis.vertical,
-        child:FutureBuilder<RecommendModel>(
+        child: FutureBuilder<RecommendModel>(
             future: getrecommendFood(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {

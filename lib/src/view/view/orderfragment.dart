@@ -89,6 +89,8 @@ class _OrderFragmentState extends State<OrderFragment> {
                                   width: 8,
                                 ),
                                 Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     RatingBarIndicator(
                                       rating: double.parse(
@@ -100,6 +102,23 @@ class _OrderFragmentState extends State<OrderFragment> {
                                       itemCount: 5,
                                       itemSize: 20.0,
                                       direction: Axis.horizontal,
+                                    ),
+                                    MaterialButton(
+                                      color: Colors.red,
+                                      onPressed: () {},
+                                      child: SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.31,
+                                        child: Text(
+                                          "ReOrder",
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
                                     ),
                                   ],
                                 )

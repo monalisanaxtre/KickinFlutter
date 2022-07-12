@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kickinn/servicewrapper/getpromotion.dart';
 import 'package:kickinn/src/data/promooffermodel.dart';
+import 'package:clipboard/clipboard.dart';
 
 class PromotionFragment extends StatefulWidget {
   PromotionFragment({Key? key}) : super(key: key);
@@ -148,6 +149,28 @@ class _getAllOfferState extends State<getAllOffer> {
                                           // Text(snapshot.data!.data[index].offerDescription.t)
                                         ),
                                         SizedBox(height: 3),
+                                        MaterialButton(
+                                          color: Colors.red,
+                                          onPressed: () {
+                                            //                                          FlutterClipboard.copy(field.text).then((value) {
+                                            //   _showSnackBar();
+                                            // });
+                                          },
+                                          child: SizedBox(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.28,
+                                            child: Text(
+                                              "Copy Code",
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                        ),
                                       ]),
                                       onTap: () {}))));
                     });

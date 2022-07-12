@@ -84,12 +84,12 @@ class _ProfileState extends State<Profile> {
                         height: 50,
                       ),
                       Container(
-                        padding: EdgeInsets.all(6), // Border width
+                        padding: EdgeInsets.all(6),
                         decoration: BoxDecoration(
                             color: Colors.grey, shape: BoxShape.circle),
                         child: ClipOval(
                           child: SizedBox.fromSize(
-                              size: Size.fromRadius(48), // Image radius
+                              size: Size.fromRadius(48),
                               child: Image(
                                 image:
                                     NetworkImage(_profileModel.data.userPhoto),
