@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kickinn/src/presentation/view/homeview.dart/pickuporder.dart';
 import 'package:kickinn/src/presentation/view/login.dart';
 
 class getStarted extends StatelessWidget {
@@ -45,7 +46,12 @@ class getStarted extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     color: Colors.white),
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => PickupOrder()),
+                );
+              },
             ),
           ),
           SizedBox(
